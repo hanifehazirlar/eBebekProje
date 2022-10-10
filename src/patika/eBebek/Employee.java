@@ -32,20 +32,22 @@ public class Employee {
         System.out.println(employee);
         System.out.println("Tax : "+tax(employee.salary)+ " $");
         System.out.println("Bonus : "+bonus(employee.workHours)+" $");
-        System.out.println("Raise salary : "+raiseSalary(employee.hireYear,employee.salary)+" $");
-        System.out.println("Salary with bonuses : "+(employee.salary+bonus(employee.workHours))+" $");
+        System.out.println("Raise salary : "+raiseSalary(employee.hireYear,employee.salary, employee.workHours)+" $");
+        System.out.println("Salary with bonuses : "+(employee.salary+bonus(employee.workHours)-tax(employee.salary))+" $");
         System.out.println("Total Salary : "+(employee.salary+bonus(employee.workHours)+
-                raiseSalary(employee.hireYear,employee.salary)-tax(employee.salary))+" $");
+                raiseSalary(employee.hireYear,employee.salary, employee.workHours)-tax(employee.salary))+" $");
     }
 
-    private static double raiseSalary(int hireYear,double salary) {
+
+    private static double raiseSalary(int hireYear,double salary,int workHours) {
         double raiseSalary=0;
+        salary+=(bonus(workHours)-tax(salary));
         if ((2021-hireYear)<10){
             raiseSalary=salary*0.05;
-        }else if((2021-hireYear>9 & (2021-hireYear)<20)){
+        }else if((2021-hireYear>9 && (2021-hireYear)<20)){
             raiseSalary=salary*0.10;
         }else{
-            System.out.println("Isyerimizde 20 ve uzeri yil calisilamaz");
+           raiseSalary=salary*0.15;
         }
         return raiseSalary;
     }
@@ -54,20 +56,15 @@ public class Employee {
         double bonus=0;
         if (workHours>40){
             bonus=(workHours-40)*30;
-        }else{
-            bonus= 0;
         }
         return bonus;
     }
 
     private static double tax(double salary) {
         double tax=0;
-        if (salary<1000){
-            tax=0;
-        }else{
+        if (salary>1000){
             tax=salary*0.03;
-        }
-        return tax;
+        }return tax;
     }
 
 

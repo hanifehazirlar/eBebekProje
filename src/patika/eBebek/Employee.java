@@ -28,7 +28,7 @@ public class Employee {
 
     public static void main(String[] args) {
 
-        Employee employee = new Employee("Fatma Mavi",2500,45,2010);
+        Employee employee = new Employee("Fatma Mavi",2000,45,1985);
         System.out.println(employee);
         System.out.println("Tax : "+tax(employee.salary)+ " $");
         System.out.println("Bonus : "+bonus(employee.workHours)+" $");
@@ -41,7 +41,6 @@ public class Employee {
 
     private static double raiseSalary(int hireYear,double salary,int workHours) {
         double raiseSalary=0;
-        salary+=(bonus(workHours)-tax(salary));
         if ((2021-hireYear)<10){
             raiseSalary=salary*0.05;
         }else if((2021-hireYear>9 && (2021-hireYear)<20)){
@@ -59,7 +58,6 @@ public class Employee {
         }
         return bonus;
     }
-
     private static double tax(double salary) {
         double tax=0;
         if (salary>1000){
